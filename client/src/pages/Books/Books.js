@@ -93,18 +93,25 @@ class Books extends Component {
               <h1>Current Habits</h1>
             </Jumbotron>
             {this.state.books.length ? (
-              <List>
+              <List><table cellpadding="10">
                 {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
+                  <tr><ListItem key={book._id}>
+                      <td>
                         {book.username}
-                      </strong>
-                    </Link>
+                      </td>
+                      <td>
+                        {book.habit}
+                      </td>
+                      <td>
+                       Day Streak: {book.dayCounter}
+                      </td>
+                      <td>
+                       Today's Status: {book.dayCounter}
+                      </td>
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                  </ListItem>
+                  </ListItem></tr>
                 ))}
-              </List>
+              </table></List>
             ) : (
               <h3>No Results to Display</h3>
             )}
