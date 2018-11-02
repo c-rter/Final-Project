@@ -10,9 +10,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 class Books extends Component {
   state = {
     books: [],
-    title: "",
-    author: "",
-    synopsis: ""
+    habit: ""
   };
 
   componentDidMount() {
@@ -22,7 +20,7 @@ class Books extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ books: res.data, habit: ""})
       )
       .catch(err => console.log(err));
   };
@@ -42,11 +40,13 @@ class Books extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
+    if (true) {
       API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
+        username: "testusername",
+        password: "testpassword",
+        habit: this.state.habit,
+        dayCounter: 0,
+        dailyStatus: 0 
       })
         .then(res => this.loadBooks())
         .catch(err => console.log(err));
@@ -63,29 +63,12 @@ class Books extends Component {
             </Jumbotron>
             <form>
               <Input
-                value={this.state.title}
+                value={this.state.habit}
                 onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
+                name="habit"
+                placeholder="ENTER A NEW HABIT"
               />
-              <Input
-                value={this.state.author}
-                onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                value={this.state.synopsis}
-                onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              />
-              <FormBtn
-                disabled={!(this.state.author && this.state.title)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Habit
-              </FormBtn>
+              <FormBtn onClick={this.handleFormSubmit}> Submit Habit </FormBtn>
             </form>
           </Col>
           <Col size="md-6 sm-12">
@@ -106,7 +89,7 @@ class Books extends Component {
                        Day Streak: {book.dayCounter}
                       </td>
                       <td>
-                       Today's Status: {book.dayCounter}
+                       Today's Status: {book.dailyStatus}
                       </td>
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
                   </ListItem></tr>
