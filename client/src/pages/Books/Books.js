@@ -19,9 +19,7 @@ class Books extends Component {
 
   loadBooks = () => {
     API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, habit: ""})
-      )
+      .then(res => this.setState({ books: res.data, habit: "" }))
       .catch(err => console.log(err));
   };
 
@@ -46,7 +44,7 @@ class Books extends Component {
         password: "testpassword",
         habit: this.state.habit,
         dayCounter: 0,
-        dailyStatus: 0 
+        dailyStatus: 0
       })
         .then(res => this.loadBooks())
         .catch(err => console.log(err));
@@ -76,25 +74,21 @@ class Books extends Component {
               <h1>Current Habits</h1>
             </Jumbotron>
             {this.state.books.length ? (
-              <List><table cellpadding="10">
-                {this.state.books.map(book => (
-                  <tr><ListItem key={book._id}>
-                      <td>
-                        {book.username}
-                      </td>
-                      <td>
-                        {book.habit}
-                      </td>
-                      <td>
-                       Day Streak: {book.dayCounter}
-                      </td>
-                      <td>
-                       Today's Status: {book.dailyStatus}
-                      </td>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                  </ListItem></tr>
-                ))}
-              </table></List>
+              <List>
+                <table cellpadding="10">
+                  {this.state.books.map(book => (
+                    <tr>
+                      <ListItem key={book._id}>
+                        <td>{book.username}</td>
+                        <td>{book.habit}</td>
+                        <td>Day Streak: {book.dayCounter}</td>
+                        <td>Today's Status: {book.dailyStatus}</td>
+                        <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                      </ListItem>
+                    </tr>
+                  ))}
+                </table>
+              </List>
             ) : (
               <h3>No Results to Display</h3>
             )}
