@@ -6,7 +6,8 @@ const goalSchema = new Schema({
   password: String,
   habit: String,
   dayCounter: Number,
-  dailyStatus: Number
+  dailyStatus: Number,
+  habitStatus: String
 });
 
 const Goal = mongoose.model("Goal", goalSchema);

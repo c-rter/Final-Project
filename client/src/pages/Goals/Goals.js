@@ -48,7 +48,8 @@ class Goals extends Component {
         password: "testpassword",
         habit: this.state.habit,
         dayCounter: 0,
-        dailyStatus: 0 
+        dailyStatus: 0,
+        habitStatus: "active" 
       })
         .then(res => this.loadGoals())
         .catch(err => console.log(err));
