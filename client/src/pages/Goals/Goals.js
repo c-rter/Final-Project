@@ -15,6 +15,8 @@ class Goals extends Component {
   };
 
   componentDidMount() {
+    const { userValue } = this.props.location
+    alert("Welcome, " + userValue + "!");
     this.loadGoals();
   }
 

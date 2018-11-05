@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Redirect } from 'react-router';
+
+
 
 class Login extends Component {
   constructor(props) {
@@ -49,7 +52,8 @@ class Login extends Component {
           (this.state.pwd === this.state.goals[i].password)
         ) {
           console.log("Awesome!");
-          window.location.href = "/goals";
+          //window.location.href = "/goals";
+          this.setState({redirect: true});
         } else {
           console.log("HFS broken");
         }
@@ -58,6 +62,13 @@ class Login extends Component {
   };
 
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect push to={{
+        pathname: "/goals/",
+        userValue: this.state.user }} />;
+    }
+
     return (
       <Container fluid>
         <Input
