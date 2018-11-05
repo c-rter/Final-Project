@@ -8,28 +8,28 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 
-class Books extends Component {
+class Goals extends Component {
   state = {
-    books: [],
+    goals: [],
     habit: ""
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.loadGoals();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  loadGoals = () => {
+    API.getGoals()
       .then(res =>
-        this.setState({ books: res.data, habit: ""})
+        this.setState({ goals: res.data, habit: ""})
       )
       .catch(err => console.log(err));
   };
 
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
+  deleteGoal = id => {
+    API.deleteGoal(id)
+      .then(res => this.loadGoals())
       .catch(err => console.log(err));
   };
 
@@ -43,34 +43,34 @@ class Books extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (true) {
-      API.saveBook({
+      API.saveGoal({
         username: "testusername",
         password: "testpassword",
         habit: this.state.habit,
         dayCounter: 0,
         dailyStatus: 0 
       })
-        .then(res => this.loadBooks())
+        .then(res => this.loadGoals())
         .catch(err => console.log(err));
     }
   };
 
   handleSpecificFormSubmit = event => {
     event.preventDefault();
-    API.getBooks()
+    API.getGoals()
     .then(res =>
       {
-      var bookSelection = res;
-      var currentBooks = [];
+      var goalSelection = res;
+      var currentGoals = [];
       var nameToCompare = this.state.compareName;
 
-      for (var i=0; i<bookSelection.data.length; i++) {
-        if (nameToCompare==bookSelection.data[i].username)
+      for (var i=0; i<goalSelection.data.length; i++) {
+        if (nameToCompare==goalSelection.data[i].username)
           {
-            currentBooks.push(bookSelection.data[i]);
+            currentGoals.push(goalSelection.data[i]);
           }
       }      
-      this.setState({ books: currentBooks, habit: ""})
+      this.setState({ goals: currentGoals, habit: ""})
       }
     )
     .catch(err => console.log(err));
@@ -102,7 +102,7 @@ class Books extends Component {
                 placeholder="VIEW SPECIFIC PERSONS HABITS"
               />
               <FormBtn onClick={this.handleSpecificFormSubmit}> Person's Habits</FormBtn><br/>
-              <FormBtn onClick={this.loadBooks}> All Habits</FormBtn><br/>
+              <FormBtn onClick={this.loadGoals}> All Habits</FormBtn><br/>
 
             </form>
           </Col>
@@ -110,23 +110,23 @@ class Books extends Component {
             <Jumbotron>
               <h1>Current Habits</h1>
             </Jumbotron>
-            {this.state.books.length ? (
+            {this.state.goals.length ? (
               <List><table cellpadding="10">
-                {this.state.books.map(book => (
-                  <tr><ListItem key={book._id}>
+                {this.state.goals.map(goal => (
+                  <tr><ListItem key={goal._id}>
                       <td>
-                        {book.username}
+                        {goal.username}
                       </td>
                       <td>
-                        {book.habit}
+                        {goal.habit}
                       </td>
                       <td>
-                       Day Streak: {book.dayCounter}
+                       Day Streak: {goal.dayCounter}
                       </td>
                       <td>
-                       Today's Status: {book.dailyStatus}
+                       Today's Status: {goal.dailyStatus}
                       </td>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    <DeleteBtn onClick={() => this.deleteGoal(goal._id)} />
                   </ListItem></tr>
                 ))}
               </table></List>
@@ -140,4 +140,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Goals;

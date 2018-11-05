@@ -11,7 +11,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: "",
+      goals: "",
       user: "", // for entry
       pwd: "" // for entry
     };
@@ -19,14 +19,14 @@ class Login extends Component {
 
   // Load database
   componentDidMount() {
-    this.loadBooks();
+    this.loadGoals();
   }
   // fn to load database
-  loadBooks = () => {
-    API.getBooks()
+  loadGoals = () => {
+    API.getGoals()
       .then(res => {
-        this.state.books = res.data;
-        console.log(this.state.books);
+        this.state.goals = res.data;
+        console.log(this.state.goals);
       })
 
       .catch(err => console.log(err));
@@ -43,13 +43,13 @@ class Login extends Component {
     event.preventDefault();
     if (this.state.user && this.state.pwd) {
       console.log("Form Submit");
-      for (var i = 0; i < this.state.books.length; i++) {
+      for (var i = 0; i < this.state.goals.length; i++) {
         if (
-          (this.state.user === this.state.books[i].username) &
-          (this.state.pwd === this.state.books[i].password)
+          (this.state.user === this.state.goals[i].username) &
+          (this.state.pwd === this.state.goals[i].password)
         ) {
           console.log("Awesome!");
-          window.location.href = "/books";
+          window.location.href = "/goals";
         } else {
           console.log("HFS broken");
         }
@@ -72,7 +72,7 @@ class Login extends Component {
           name="pwd"
           placeholder="password (required)"
         />
-        <form method="get" action="/books">
+        <form method="get" action="/goals">
           <FormBtn
             disabled={!(this.state.user && this.state.pwd)}
             onClick={this.handleFormSubmit}

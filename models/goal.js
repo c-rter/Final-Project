@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const bookSchema = new Schema({
+const goalSchema = new Schema({
   username: String,
   password: String,
   habit: String,
@@ -9,6 +9,6 @@ const bookSchema = new Schema({
   dailyStatus: Number
 });
 
-const Book = mongoose.model("Book", bookSchema);
+const Goal = mongoose.model("Goal", goalSchema);
 
-module.exports = Book;
+module.exports = Goal;

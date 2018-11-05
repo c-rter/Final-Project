@@ -16,7 +16,7 @@ mongoose.connect(
   date: new Date(Date.now())
 }, */
 
-const bookSeed = [
+const goalSeed = [
   {
     username: "carter",
     password: "123",
@@ -40,9 +40,9 @@ const bookSeed = [
   }
 ];
 
-db.Book
+db.Goal
   .remove({})
-  .then(() => db.Book.collection.insertMany(bookSeed))
+  .then(() => db.Goal.collection.insertMany(goalSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
