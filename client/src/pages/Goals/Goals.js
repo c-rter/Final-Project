@@ -33,7 +33,10 @@ class Goals extends Component {
       for (var i=0; i<goalSelection.data.length; i++) {
         if (nameToCompare==goalSelection.data[i].username)
           {
-            currentGoals.push(goalSelection.data[i]);
+            if (goalSelection.data[i].habitStatus=="active")
+              {
+                currentGoals.push(goalSelection.data[i]);
+              }
           }
       }      
       this.setState({ goals: currentGoals, habit: ""})
