@@ -66,7 +66,8 @@ class Login extends Component {
     if (this.state.redirect) {
       return <Redirect push to={{
         pathname: "/goals/",
-        userValue: this.state.user }} />;
+        userValue: this.state.user,
+        passValue: this.state.pwd }} />;
     }
 
     return (
