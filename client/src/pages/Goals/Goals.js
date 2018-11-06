@@ -9,7 +9,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 
 var userValue = {};
-var passValue = {} 
+var passValue = {};
 
 class Goals extends Component {
   state = {
@@ -86,8 +86,14 @@ class Goals extends Component {
             <Jumbotron>
               <h1>Enter Habit to Make or Break</h1>
             </Jumbotron>
-            <Link to={"/halloffame/"}>HALL OF FAME</Link><br/>
-            <Link to={"/hallofshame/"}>HALL OF SHAME</Link><br/><br/>
+            <Link to={{
+                        pathname: "/halloffame/",
+                        userValue: userValue,
+                        passValue: passValue }}>HALL OF FAME</Link><br/>
+            <Link to={{
+                        pathname: "/hallofshame/",
+                        userValue: userValue,
+                        passValue: passValue }}>HALL OF SHAME</Link><br/><br/>
             <form>
               <Input
                 value={this.state.habit}

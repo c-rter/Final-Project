@@ -8,6 +8,10 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 
+var userValue = {};
+var passValue = {};
+
+
 class HallofShame extends Component {
   state = {
     goals: [],
@@ -15,6 +19,10 @@ class HallofShame extends Component {
   };
 
   componentDidMount() {
+    userValue = this.props.location.userValue;
+    passValue = this.props.location.passValue;
+    alert("Welcome, " + userValue + "!");
+    alert("Your password is " + passValue + "!");
     this.loadGoals();
   }
 
@@ -93,7 +101,10 @@ class HallofShame extends Component {
     return (
       <Container fluid>
         <Row>
-          <Link to={"/goals/"}>BACK TO MAIN</Link>
+          <Link to={{
+                        pathname: "/goals/",
+                        userValue: userValue,
+                        passValue: passValue }}>BACK TO MAIN</Link>
           <Col size="md-12 sm-12">
             <Jumbotron>
               <h1>Hall of Shame</h1>
