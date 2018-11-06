@@ -86,6 +86,7 @@ class Goals extends Component {
             <Jumbotron>
               <h1>Enter Habit to Make or Break</h1>
             </Jumbotron>
+            <Link to={"/"}>LOG OUT</Link><br/>
             <Link to={{
                         pathname: "/halloffame/",
                         userValue: userValue,
