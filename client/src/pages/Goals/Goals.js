@@ -8,6 +8,8 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 
+var userValue = {}; 
+
 class Goals extends Component {
   state = {
     goals: [],
@@ -15,17 +17,29 @@ class Goals extends Component {
   };
 
   componentDidMount() {
-    const { userValue } = this.props.location
+    userValue = this.props.location.userValue
     alert("Welcome, " + userValue + "!");
     this.loadGoals();
   }
 
   loadGoals = () => {
     API.getGoals()
-      .then(res =>
-        this.setState({ goals: res.data, habit: ""})
-      )
-      .catch(err => console.log(err));
+    .then(res =>
+      {
+      var goalSelection = res;
+      var currentGoals = [];
+      var nameToCompare = userValue;
+
+      for (var i=0; i<goalSelection.data.length; i++) {
+        if (nameToCompare==goalSelection.data[i].username)
+          {
+            currentGoals.push(goalSelection.data[i]);
+          }
+      }      
+      this.setState({ goals: currentGoals, habit: ""})
+      }
+    )
+    .catch(err => console.log(err));
   };
 
 
