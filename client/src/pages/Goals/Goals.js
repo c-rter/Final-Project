@@ -20,8 +20,8 @@ class Goals extends Component {
   componentDidMount() {
     userValue = this.props.location.userValue;
     passValue = this.props.location.passValue;
-    alert("Welcome, " + userValue + "!");
-    alert("Your password is " + passValue + "!");
+  //  alert("Welcome, " + userValue + "!");
+  //  alert("Your password is " + passValue + "!");
     this.loadGoals();
   }
 
