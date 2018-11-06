@@ -20,10 +20,22 @@ class HallofShame extends Component {
 
   loadGoals = () => {
     API.getGoals()
-      .then(res =>
-        this.setState({ goals: res.data, habit: ""})
-      )
-      .catch(err => console.log(err));
+    .then(res =>
+      {
+      var goalSelection = res;
+      var currentGoals = [];
+      var statusToCompare = "fail";
+
+      for (var i=0; i<goalSelection.data.length; i++) {
+        if (statusToCompare==goalSelection.data[i].habitStatus)
+          {
+            currentGoals.push(goalSelection.data[i]);
+          }
+      }      
+      this.setState({ goals: currentGoals, habit: ""})
+      }
+    )
+    .catch(err => console.log(err));
   };
 
 

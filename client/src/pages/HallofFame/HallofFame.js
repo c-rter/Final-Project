@@ -20,52 +20,14 @@ class HallofFame extends Component {
 
   loadGoals = () => {
     API.getGoals()
-      .then(res =>
-        this.setState({ goals: res.data, habit: ""})
-      )
-      .catch(err => console.log(err));
-  };
-
-
-  deleteGoal = id => {
-    API.deleteGoal(id)
-      .then(res => this.loadGoals())
-      .catch(err => console.log(err));
-  };
-
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (true) {
-      API.saveGoal({
-        username: "testusername",
-        password: "testpassword",
-        habit: this.state.habit,
-        dayCounter: 0,
-        dailyStatus: 0 
-      })
-        .then(res => this.loadGoals())
-        .catch(err => console.log(err));
-    }
-  };
-
-  handleSpecificFormSubmit = event => {
-    event.preventDefault();
-    API.getGoals()
     .then(res =>
       {
       var goalSelection = res;
       var currentGoals = [];
-      var nameToCompare = this.state.compareName;
+      var statusToCompare = "achieve";
 
       for (var i=0; i<goalSelection.data.length; i++) {
-        if (nameToCompare==goalSelection.data[i].username)
+        if (statusToCompare==goalSelection.data[i].habitStatus)
           {
             currentGoals.push(goalSelection.data[i]);
           }
@@ -74,7 +36,20 @@ class HallofFame extends Component {
       }
     )
     .catch(err => console.log(err));
-   
+  };
+
+
+/*  deleteGoal = id => {
+    API.deleteGoal(id)
+      .then(res => this.loadGoals())
+      .catch(err => console.log(err));
+  }; */
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   render() {
