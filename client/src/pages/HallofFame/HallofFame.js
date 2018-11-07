@@ -8,6 +8,10 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 
+var userValue = {};
+var passValue = {};
+
+
 class HallofFame extends Component {
   state = {
     goals: [],
@@ -15,57 +19,23 @@ class HallofFame extends Component {
   };
 
   componentDidMount() {
+    userValue = this.props.location.userValue;
+    passValue = this.props.location.passValue;
+ //   alert("Welcome, " + userValue + "!");
+ //   alert("Your password is " + passValue + "!");
     this.loadGoals();
   }
 
   loadGoals = () => {
     API.getGoals()
-      .then(res =>
-        this.setState({ goals: res.data, habit: ""})
-      )
-      .catch(err => console.log(err));
-  };
-
-
-  deleteGoal = id => {
-    API.deleteGoal(id)
-      .then(res => this.loadGoals())
-      .catch(err => console.log(err));
-  };
-
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (true) {
-      API.saveGoal({
-        username: "testusername",
-        password: "testpassword",
-        habit: this.state.habit,
-        dayCounter: 0,
-        dailyStatus: 0 
-      })
-        .then(res => this.loadGoals())
-        .catch(err => console.log(err));
-    }
-  };
-
-  handleSpecificFormSubmit = event => {
-    event.preventDefault();
-    API.getGoals()
     .then(res =>
       {
       var goalSelection = res;
       var currentGoals = [];
-      var nameToCompare = this.state.compareName;
+      var statusToCompare = "achieve";
 
       for (var i=0; i<goalSelection.data.length; i++) {
-        if (nameToCompare==goalSelection.data[i].username)
+        if (statusToCompare==goalSelection.data[i].habitStatus)
           {
             currentGoals.push(goalSelection.data[i]);
           }
@@ -74,14 +44,30 @@ class HallofFame extends Component {
       }
     )
     .catch(err => console.log(err));
-   
+  };
+
+
+/*  deleteGoal = id => {
+    API.deleteGoal(id)
+      .then(res => this.loadGoals())
+      .catch(err => console.log(err));
+  }; */
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   render() {
     return (
       <Container fluid>
         <Row>
-          <Link to={"/goals/"}>BACK TO MAIN</Link>
+          <Link to={{
+                        pathname: "/goals/",
+                        userValue: userValue,
+                        passValue: passValue }}>BACK TO MAIN</Link>
           <Col size="md-12 sm-12">
             <Jumbotron>
               <h1>Hall of Fame</h1>

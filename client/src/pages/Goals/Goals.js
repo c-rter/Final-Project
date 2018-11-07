@@ -8,6 +8,9 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 
+var userValue = {};
+var passValue = {};
+
 class Goals extends Component {
   state = {
     goals: [],
@@ -15,17 +18,34 @@ class Goals extends Component {
   };
 
   componentDidMount() {
-    const { userValue } = this.props.location
-    alert("Welcome, " + userValue + "!");
+    userValue = this.props.location.userValue;
+    passValue = this.props.location.passValue;
+  //  alert("Welcome, " + userValue + "!");
+  //  alert("Your password is " + passValue + "!");
     this.loadGoals();
   }
 
   loadGoals = () => {
     API.getGoals()
-      .then(res =>
-        this.setState({ goals: res.data, habit: ""})
-      )
-      .catch(err => console.log(err));
+    .then(res =>
+      {
+      var goalSelection = res;
+      var currentGoals = [];
+      var nameToCompare = userValue;
+
+      for (var i=0; i<goalSelection.data.length; i++) {
+        if (nameToCompare==goalSelection.data[i].username)
+          {
+            if (goalSelection.data[i].habitStatus=="active")
+              {
+                currentGoals.push(goalSelection.data[i]);
+              }
+          }
+      }      
+      this.setState({ goals: currentGoals, habit: ""})
+      }
+    )
+    .catch(err => console.log(err));
   };
 
 
@@ -46,8 +66,8 @@ class Goals extends Component {
     event.preventDefault();
     if (true) {
       API.saveGoal({
-        username: "testusername",
-        password: "testpassword",
+        username: userValue,
+        password: passValue,
         habit: this.state.habit,
         dayCounter: 0,
         dailyStatus: 0,
@@ -58,28 +78,6 @@ class Goals extends Component {
     }
   };
 
-  handleSpecificFormSubmit = event => {
-    event.preventDefault();
-    API.getGoals()
-    .then(res =>
-      {
-      var goalSelection = res;
-      var currentGoals = [];
-      var nameToCompare = this.state.compareName;
-
-      for (var i=0; i<goalSelection.data.length; i++) {
-        if (nameToCompare==goalSelection.data[i].username)
-          {
-            currentGoals.push(goalSelection.data[i]);
-          }
-      }      
-      this.setState({ goals: currentGoals, habit: ""})
-      }
-    )
-    .catch(err => console.log(err));
-   
-  };
-
   render() {
     return (
       <Container fluid>
@@ -88,8 +86,15 @@ class Goals extends Component {
             <Jumbotron>
               <h1>Enter Habit to Make or Break</h1>
             </Jumbotron>
-            <Link to={"/halloffame/"}>HALL OF FAME</Link><br/>
-            <Link to={"/hallofshame/"}>HALL OF SHAME</Link><br/><br/>
+            <Link to={"/"}>LOG OUT</Link><br/>
+            <Link to={{
+                        pathname: "/halloffame/",
+                        userValue: userValue,
+                        passValue: passValue }}>HALL OF FAME</Link><br/>
+            <Link to={{
+                        pathname: "/hallofshame/",
+                        userValue: userValue,
+                        passValue: passValue }}>HALL OF SHAME</Link><br/><br/>
             <form>
               <Input
                 value={this.state.habit}
@@ -98,17 +103,6 @@ class Goals extends Component {
                 placeholder="ENTER A NEW HABIT"
               />
               <FormBtn onClick={this.handleFormSubmit}> Submit Habit </FormBtn>
-            </form>
-            <form>
-              <Input
-                value={this.state.compareName}
-                onChange={this.handleInputChange}
-                name="compareName"
-                placeholder="VIEW SPECIFIC PERSONS HABITS"
-              />
-              <FormBtn onClick={this.handleSpecificFormSubmit}> Person's Habits</FormBtn><br/>
-              <FormBtn onClick={this.loadGoals}> All Habits</FormBtn><br/>
-
             </form>
           </Col>
           <Col size="md-6 sm-12">

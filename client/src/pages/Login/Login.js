@@ -108,7 +108,8 @@ class Login extends Component {
           push
           to={{
             pathname: "/goals/",
-            userValue: this.state.user
+            userValue: this.state.user,
+            passValue: this.state.pwd
           }}
         />
       );
