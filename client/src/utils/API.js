@@ -1,6 +1,11 @@
 import axios from "axios";
 
 export default {
+
+  //axios.post(url[, data[, config]])
+  //axios.put(url[, data[, config]])
+
+
   // Gets all goals
   getGoals: function() {
     return axios.get("/api/goals");
@@ -8,6 +13,9 @@ export default {
   // Gets the goal with the given id
   getGoal: function(id) {
     return axios.get("/api/goals/" + id);
+  },
+  updateGoal: function(id, updateObject) {
+    return axios.put("/api/goals/" + id, updateObject);
   },
   // Deletes the goal with the given id
   deleteGoal: function(id) {

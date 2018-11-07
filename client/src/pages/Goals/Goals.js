@@ -7,9 +7,13 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
+import CounterBtn from "../../components/CounterBtn";
 
 var userValue = {};
 var passValue = {};
+var statusChanger = {dailyStatus: 1};
+
+//{_id: new ObjectId(stringId)
 
 class Goals extends Component {
   state = {
@@ -18,6 +22,7 @@ class Goals extends Component {
   };
 
   componentDidMount() {
+//    this.examplePutFunction(stringID, testChanger);
     userValue = this.props.location.userValue;
     passValue = this.props.location.passValue;
   //  alert("Welcome, " + userValue + "!");
@@ -48,6 +53,12 @@ class Goals extends Component {
     .catch(err => console.log(err));
   };
 
+  changeTheStatus = (id, changingObject) => {
+    API.updateGoal(id, changingObject)
+      .then()
+      .catch(err => console.log(err));
+      this.loadGoals();
+  };
 
   deleteGoal = id => {
     API.deleteGoal(id)
@@ -126,6 +137,7 @@ class Goals extends Component {
                        Today's Status: {goal.dailyStatus}
                       </td>
                     <DeleteBtn onClick={() => this.deleteGoal(goal._id)} />
+                    <CounterBtn onClick={() => this.changeTheStatus(goal._id, statusChanger)} />
                   </ListItem></tr>
                 ))}
               </table></List>
