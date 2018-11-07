@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
-import { Redirect } from 'react-router';
-
-
+import { Redirect } from "react-router";
 
 class Login extends Component {
   constructor(props) {
@@ -16,7 +14,12 @@ class Login extends Component {
     this.state = {
       goals: "",
       user: "", // for entry
-      pwd: "" // for entry
+      pwd: "", // for entry
+      habit: "", // for entry
+      signupUser: "",
+      signupPwd1: "",
+      signupPwd2: "",
+      signupHabit: ""
     };
   }
 
@@ -53,7 +56,7 @@ class Login extends Component {
         ) {
           console.log("Awesome!");
           //window.location.href = "/goals";
-          this.setState({redirect: true});
+          this.setState({ redirect: true });
         } else {
           console.log("HFS broken");
         }
@@ -61,12 +64,54 @@ class Login extends Component {
     }
   };
 
-  render() {
+  // Sign Up Btn - Toggle Sign up form view
+  handleSignUpToggle = event => {
+    console.log("Toggle View");
+  };
+  // Sign Up Process
+  handleSignUpSubmit = event => {
+    event.preventDefault();
+    if (this.state.signupPwd1 === this.state.signupPwd2) {
+      // compare all users stored in
+      for (var i = 0; i < this.state.goals.length; i++) {
+        if (this.state.signupUser === this.state.goals[i].username) {
+          alert("Exit fn, User already exists. Please Login");
+        } else if (i == this.state.goals.length - 1) {
+          alert("Save and Sign Up");
+          this.state.username = this.state.signupUser;
+          this.state.password = this.state.signupPwd1;
+          this.state.habit = this.state.signupHabit;
 
+          API.saveGoal({
+            username: this.state.username,
+            password: this.state.password,
+            habit: this.state.habit,
+            dayCounter: 0,
+            dailyStatus: 0,
+            habitStatus: "active"
+          });
+          this.setState({ redirect: true });
+        }
+      }
+
+      //IF exists ask to log in //
+      //ELSE save to users and signup and go to books/
+
+      alert("Passwords should match");
+    }
+  };
+
+  render() {
     if (this.state.redirect) {
-      return <Redirect push to={{
-        pathname: "/goals/",
-        userValue: this.state.user }} />;
+      return (
+        <Redirect
+          push
+          to={{
+            pathname: "/goals/",
+            userValue: this.state.user
+          }}
+        />
+      );
     }
 
     return (
@@ -83,12 +128,54 @@ class Login extends Component {
           name="pwd"
           placeholder="password (required)"
         />
-        <form method="get" action="/goals">
+        <form>
           <FormBtn
             disabled={!(this.state.user && this.state.pwd)}
             onClick={this.handleFormSubmit}
           >
             Login
+          </FormBtn>
+        </form>
+
+        <form>
+          <FormBtn onClick={this.handleSignUpToggle}>SignUp</FormBtn>
+        </form>
+        <Input
+          value={this.state.signupUser} //this.state.username
+          onChange={this.handleInputChange}
+          name="signupUser"
+          placeholder="Choose a username (required)"
+        />
+        <Input
+          value={this.state.signupPwd1} //this.state.username
+          onChange={this.handleInputChange}
+          name="signupPwd1"
+          placeholder="Choose a password (required)"
+        />
+        <Input
+          value={this.state.signupPwd2} //this.state.username
+          onChange={this.handleInputChange}
+          name="signupPwd2"
+          placeholder="Confirm password (required)"
+        />
+        <Input
+          value={this.state.signupHabit} //this.state.username
+          onChange={this.handleInputChange}
+          name="signupHabit"
+          placeholder="Input a Habit to follow or break"
+        />
+        <form>
+          <FormBtn
+            disabled={
+              !(
+                this.state.signupUser &&
+                this.state.signupPwd2 &&
+                this.state.signupPwd2
+              )
+            }
+            onClick={this.handleSignUpSubmit}
+          >
+            Complete
           </FormBtn>
         </form>
       </Container>
