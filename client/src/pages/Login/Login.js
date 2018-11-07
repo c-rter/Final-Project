@@ -78,8 +78,8 @@ class Login extends Component {
           alert("Exit fn, User already exists. Please Login");
         } else if (i == this.state.goals.length - 1) {
           alert("Save and Sign Up");
-          this.state.username = this.state.signupUser;
-          this.state.password = this.state.signupPwd1;
+          this.state.user = this.state.signupUser;
+          this.state.pwd = this.state.signupPwd1;
           this.state.habit = this.state.signupHabit;
 
           API.saveGoal({
