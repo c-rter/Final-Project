@@ -83,9 +83,9 @@ class Login extends Component {
           this.state.habit = this.state.signupHabit;
 
           API.saveGoal({
-            username: this.state.username,
-            password: this.state.password,
-            habit: this.state.habit,
+            username: this.state.signupUser,
+            password: this.state.signupPwd1,
+            habit: this.state.signupHabit,
             dayCounter: 0,
             dailyStatus: 0,
             habitStatus: "active"
