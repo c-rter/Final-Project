@@ -8,10 +8,11 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 import CounterBtn from "../../components/CounterBtn";
+const dayOfYear = require("day-of-year");
 
 var userValue = {};
 var passValue = {};
-var currentDay = 185;
+var currentDay = dayOfYear();
 var startDate = 0;
 var counterDay = 0;
 var currentDayDisplay = 0;
@@ -112,9 +113,9 @@ class Goals extends Component {
         password: passValue,
         habit: this.state.habit,
         dayCounter: 0,
-        startDay: 0,
+        startDay: currentDay,
         habitStatus: "active",
-        rollingDay: 0 
+        rollingDay: currentDay 
       })
         .then(res => this.loadGoals())
         .catch(err => console.log(err));
