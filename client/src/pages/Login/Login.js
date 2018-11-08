@@ -64,6 +64,8 @@ class Login extends Component {
     }
   };
 
+  // Invalid SIgnup
+
   // Sign Up Btn - Toggle Sign up form view
   handleSignUpToggle = event => {
     console.log("Toggle View");
@@ -76,6 +78,7 @@ class Login extends Component {
       for (var i = 0; i < this.state.goals.length; i++) {
         if (this.state.signupUser === this.state.goals[i].username) {
           alert("Exit fn, User already exists. Please Login");
+          return false;
         } else if (i == this.state.goals.length - 1) {
           alert("Save and Sign Up");
           this.state.user = this.state.signupUser;
@@ -93,11 +96,6 @@ class Login extends Component {
           this.setState({ redirect: true });
         }
       }
-
-      //IF exists ask to log in //
-      //ELSE save to users and signup and go to books/
-
-      alert("Passwords should match");
     }
   };
 

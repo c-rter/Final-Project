@@ -3,10 +3,7 @@ const db = require("../models");
 
 // This file empties the Books collection and inserts the books below
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/21days"
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/21days");
 
 /* {
   title: "The Dead Zone",
@@ -46,8 +43,7 @@ const goalSeed = [
   }
 ];
 
-db.Goal
-  .remove({})
+db.Goal.remove({})
   .then(() => db.Goal.collection.insertMany(goalSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
