@@ -21,8 +21,8 @@ const goalSeed = [
     username: "carter",
     password: "password",
     habit: "test habit",
-    dayCounter: 5,
-    startDay: 305,
+    dayCounter: 20,
+    startDay: 290,
     habitStatus: "active",
     rollingDay: 310
   },

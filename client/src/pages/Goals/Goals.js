@@ -17,7 +17,9 @@ var startDate = 0;
 var counterDay = 0;
 var currentDayDisplay = 0;
 var statusChanger = {dayCounter: counterDay, rollingDay: currentDay};
-var habitStatusChanger = {habitStatus: "fail"}
+var habitStatusChanger = {habitStatus: "fail"};
+var habitStatusChangerSuccess = {habitStatus: "achieve"};
+
 
 //{_id: new ObjectId(stringId)
 
@@ -49,7 +51,10 @@ class Goals extends Component {
           {
             if (goalSelection.data[i].habitStatus=="active")
               {
-                if ((currentDay - goalSelection.data[i].rollingDay) == 0)
+                if (goalSelection.data[i].dayCounter == 21) {
+                  this.statusSuccess(goalSelection.data[i]._id, habitStatusChangerSuccess);
+              }
+              else if ((currentDay - goalSelection.data[i].rollingDay) == 0)
                   { 
                     currentGoals.push(goalSelection.data[i]); 
                   }
@@ -91,6 +96,13 @@ class Goals extends Component {
       .then()
       .catch(err => console.log(err));
   };
+
+  statusSuccess = (id, changingObject) => {
+    API.updateGoal(id, changingObject)
+      .then()
+      .catch(err => console.log(err));
+  };
+
 
   deleteGoal = id => {
     API.deleteGoal(id)
