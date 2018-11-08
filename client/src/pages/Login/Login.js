@@ -19,7 +19,9 @@ class Login extends Component {
       signupUser: "",
       signupPwd1: "",
       signupPwd2: "",
-      signupHabit: ""
+      signupHabit: "",
+
+      isHidden: true
     };
   }
 
@@ -68,7 +70,9 @@ class Login extends Component {
 
   // Sign Up Btn - Toggle Sign up form view
   handleSignUpToggle = event => {
-    console.log("Toggle View");
+    this.setState({ isHidden: !this.state.isHidden });
+
+    alert("this.state.isHidden: ", this.state.isHidden);
   };
   // Sign Up Process
   handleSignUpSubmit = event => {
@@ -113,32 +117,8 @@ class Login extends Component {
       );
     }
 
-    return (
-      <Container fluid>
-        <Input
-          value={this.state.user} //this.state.username
-          onChange={this.handleInputChange}
-          name="user"
-          placeholder="username (required)"
-        />
-        <Input
-          value={this.state.pwd} //this.state.username
-          onChange={this.handleInputChange}
-          name="pwd"
-          placeholder="password (required)"
-        />
-        <form>
-          <FormBtn
-            disabled={!(this.state.user && this.state.pwd)}
-            onClick={this.handleFormSubmit}
-          >
-            Login
-          </FormBtn>
-        </form>
-
-        <form>
-          <FormBtn onClick={this.handleSignUpToggle}>SignUp</FormBtn>
-        </form>
+    const ShowForm = () => (
+      <div>
         <Input
           value={this.state.signupUser} //this.state.username
           onChange={this.handleInputChange}
@@ -176,6 +156,36 @@ class Login extends Component {
           >
             Complete
           </FormBtn>
+        </form>
+      </div>
+    );
+
+    return (
+      <Container fluid>
+        <Input
+          value={this.state.user} //this.state.username
+          onChange={this.handleInputChange}
+          name="user"
+          placeholder="username (required)"
+        />
+        <Input
+          value={this.state.pwd} //this.state.username
+          onChange={this.handleInputChange}
+          name="pwd"
+          placeholder="password (required)"
+        />
+        <form>
+          <FormBtn
+            disabled={!(this.state.user && this.state.pwd)}
+            onClick={this.handleFormSubmit}
+          >
+            Login
+          </FormBtn>
+        </form>
+
+        <form>
+          <FormBtn onClick={this.handleSignUpToggle.bind(this)}>SignUp</FormBtn>
+          {/*!this.state.isHidden && */ <ShowForm />}
         </form>
       </Container>
     );
