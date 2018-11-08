@@ -20,98 +20,29 @@ const goalSeed = [
   {
     username: "carter",
     password: "password",
-    habit: "practice French language",
-    dayCounter: 5,
-    dailyStatus: 0,
-    habitStatus: "active"
+    habit: "test habit",
+    dayCounter: 4,
+    startDay: 180,
+    habitStatus: "active",
+    rollingDay: 184
   },
   {
     username: "carter",
     password: "password",
-    habit: "run at the beach",
-    dayCounter: 7,
-    dailyStatus: 1,
-    habitStatus: "fail"
-  },
-  {
-    username: "carter",
-    password: "password",
-    habit: "brush cat",
-    dayCounter: 21,
-    dailyStatus: 1,
-    habitStatus: "achieve"
-  },
-  {
-    username: "raj",
-    password: "password",
-    habit: "Practice archery",
-    dayCounter: 22,
-    dailyStatus: 0,
-    habitStatus: "achieve"
-  },
-  {
-    username: "raj",
-    password: "password",
-    habit: "Learn a new word",
-    dayCounter: 8,
-    dailyStatus: 0,
-    habitStatus: "active"
-  },
-  {
-    username: "raj",
-    password: "password",
-    habit: "Cook dinner",
-    dayCounter: 15,
-    dailyStatus: 0,
-    habitStatus: "fail"
-  },
-  {
-    username: "abbas",
-    password: "password",
-    habit: "Practice boxing",
-    dayCounter: 6,
-    dailyStatus: 0,
-    habitStatus: "fail"
-  },
-  {
-    username: "abbas",
-    password: "password",
-    habit: "wake up early",
-    dayCounter: 10,
-    dailyStatus: 1,
-    habitStatus: "active"
-  },
-  {
-    username: "abbas",
-    password: "password",
-    habit: "learn guitar",
-    dayCounter: 2,
-    dailyStatus: 1,
-    habitStatus: "active"
-  },
-  {
-    username: "nitin",
-    password: "password",
-    habit: "Write poem everyday",
-    dayCounter: 5,
-    dailyStatus: 0,
-    habitStatus: "fail"
-  },
-  {
-    username: "nitin",
-    password: "password",
-    habit: "Practice swimming",
-    dayCounter: 17,
-    dailyStatus: 0,
-    habitStatus: "active"
+    habit: "test habit",
+    dayCounter: 9,
+    startDay: 175,
+    habitStatus: "active",
+    rollingDay: 184
   },
   {
     username: "nitin",
     password: "password",
     habit: "Compliment someone daily",
-    dayCounter: 21,
-    dailyStatus: 1,
-    habitStatus: "achieve"
+    dayCounter: 18,
+    startDay: 20,
+    habitStatus: "fail",
+    rollingDay: 38
   }
 ];
 
