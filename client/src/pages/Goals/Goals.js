@@ -8,6 +8,8 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 import CounterBtn from "../../components/CounterBtn";
+import ImageCard from "../../components/ImageCard";
+
 const dayOfYear = require("day-of-year");
 
 var userValue = {};
@@ -137,12 +139,7 @@ class Goals extends Component {
   render() {
     return (
       <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>Enter Habit to Make or Break</h1>
-            </Jumbotron>
-            <Link to={"/"}>LOG OUT</Link><br/>
+                  <Link to={"/"}>LOG OUT</Link><br/>
             <Link to={{
                         pathname: "/halloffame/",
                         userValue: userValue,
@@ -151,6 +148,16 @@ class Goals extends Component {
                         pathname: "/hallofshame/",
                         userValue: userValue,
                         passValue: passValue }}>HALL OF SHAME</Link><br/><br/>
+        <Row>
+          <Col size="md-1 lg-1 sm-1 xl-1"/>
+          <Col size="md-10 lg-10 sm-10 xl-10"><ImageCard cardImageSource="https://i.imgur.com/aX3MAlg.jpg"/></Col>
+          <Col size="md-1 lg-1 sm-1 xl-1"/>
+
+          <Col size="md-6">
+            <Jumbotron>
+              <h1>Enter Habit to Make or Break</h1>
+            </Jumbotron>
+            <br/>
             <form>
               <Input
                 value={this.state.habit}
@@ -162,9 +169,11 @@ class Goals extends Component {
             </form>
           </Col>
           <Col size="md-6 sm-12">
+
             <Jumbotron>
               <h1>Current Habits</h1>
             </Jumbotron>
+            <br/>
             {this.state.goals.length ? (
               <List><table cellpadding="10">
                 {this.state.goals.map(goal => (

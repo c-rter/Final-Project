@@ -7,6 +7,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
+import ImageCard from "../../components/ImageCard";
 
 var userValue = {};
 var passValue = {};
@@ -100,15 +101,15 @@ class HallofShame extends Component {
   render() {
     return (
       <Container fluid>
-        <Row>
-          <Link to={{
+                <Link to={{
                         pathname: "/goals/",
                         userValue: userValue,
                         passValue: passValue }}>BACK TO MAIN</Link>
+        <Row>
+
           <Col size="md-12 sm-12">
-            <Jumbotron>
-              <h1>Hall of Shame</h1>
-            </Jumbotron>
+          <ImageCard cardImageSource="https://i.imgur.com/yQMevRL.jpg"/>
+
             {this.state.goals.length ? (
               <List><table cellpadding="10" width="100%">
                 {this.state.goals.map(goal => (

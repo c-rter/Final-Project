@@ -7,6 +7,8 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Redirect } from "react-router";
+import ImageCard from "../../components/ImageCard";
+
 
 class Login extends Component {
   constructor(props) {
@@ -162,6 +164,8 @@ class Login extends Component {
 
     return (
       <Container fluid>
+                  <ImageCard cardImageSource="https://i.imgur.com/z7thY4a.jpg"/>
+
         <Input
           value={this.state.user} //this.state.username
           onChange={this.handleInputChange}
