@@ -8,6 +8,8 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Redirect } from "react-router";
 import ImageCard from "../../components/ImageCard";
+const dayOfYear = require("day-of-year");
+var currentDay = dayOfYear();
 
 
 class Login extends Component {
@@ -81,10 +83,9 @@ class Login extends Component {
       // compare all users stored in
       for (var i = 0; i < this.state.goals.length; i++) {
         if (this.state.signupUser === this.state.goals[i].username) {
-          alert("Exit fn, User already exists. Please Login");
+          alert("User Already Exists. Please choose a different name");
           return false;
         } else if (i == this.state.goals.length - 1) {
-          alert("Save and Sign Up");
           this.state.user = this.state.signupUser;
           this.state.pwd = this.state.signupPwd1;
           this.state.habit = this.state.signupHabit;
@@ -94,8 +95,10 @@ class Login extends Component {
             password: this.state.signupPwd1,
             habit: this.state.signupHabit,
             dayCounter: 0,
-            dailyStatus: 0,
-            habitStatus: "active"
+            startDay: currentDay,
+            habitStatus: "active",
+            rollingDay: currentDay
+
           });
           this.setState({ redirect: true });
         }
@@ -118,7 +121,7 @@ class Login extends Component {
     }
 
     const ShowForm = () => (
-      <div>
+      <div>        <form>
         <Input
           value={this.state.signupUser} //this.state.username
           onChange={this.handleInputChange}
@@ -143,7 +146,7 @@ class Login extends Component {
           name="signupHabit"
           placeholder="Input a Habit to follow or break"
         />
-        <form>
+
           <FormBtn
             disabled={
               !(
