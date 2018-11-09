@@ -9,7 +9,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import Login from "../Login/Login";
 import CounterBtn from "../../components/CounterBtn";
 import ImageCard from "../../components/ImageCard";
-
+var d3 = require("d3");
 const dayOfYear = require("day-of-year");
 
 var userValue = {};
@@ -21,7 +21,8 @@ var currentDayDisplay = 0;
 var statusChanger = {dayCounter: counterDay, rollingDay: currentDay};
 var habitStatusChanger = {habitStatus: "fail"};
 var habitStatusChangerSuccess = {habitStatus: "achieve"};
-
+var d3counter = 0;
+var tdcounter = 0;
 
 //{_id: new ObjectId(stringId)
 
@@ -47,6 +48,8 @@ class Goals extends Component {
       var goalSelection = res;
       var currentGoals = [];
       var nameToCompare = userValue;
+      d3counter = 0;
+      tdcounter = 0;
 
       for (var i=0; i<goalSelection.data.length; i++) {
         if (nameToCompare==goalSelection.data[i].username)
@@ -58,10 +61,14 @@ class Goals extends Component {
               }
               else if ((currentDay - goalSelection.data[i].rollingDay) == 0)
                   { 
+                    tdcounter += goalSelection.data[i].dayCounter;
+                    d3counter += (goalSelection.data[i].dayCounter * 5);
                     currentGoals.push(goalSelection.data[i]); 
                   }
                 else if ((currentDay - goalSelection.data[i].rollingDay) == 1)
                   {
+                    tdcounter += goalSelection.data[i].dayCounter;
+                    d3counter += (goalSelection.data[i].dayCounter * 5);
                     currentGoals.push(goalSelection.data[i]);
                   }
                 else
@@ -72,6 +79,8 @@ class Goals extends Component {
           }
       }      
       this.setState({ goals: currentGoals, habit: ""})
+      document.getElementById("idforD3").innerHTML = "";
+      this.myD3(d3counter);
       }
     )
     .catch(err => console.log(err));
@@ -118,6 +127,22 @@ class Goals extends Component {
       [name]: value
     });
   };
+
+  myD3 = (widthValue) => {
+    var sampleSVG = d3.select("#idforD3")
+    .append("svg")
+    .attr("width", 500)
+    .attr("height", 25);   
+
+  sampleSVG.append("rect")
+  .style("stroke", "aliceblue")
+  .style("fill", "#476699")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", widthValue)
+  .attr("height", 25)
+  .on("mouseover", function(){d3.select(this).style("fill", "black");})
+  .on("mouseout", function(){d3.select(this).style("fill", "#476699");});  };
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -174,20 +199,24 @@ class Goals extends Component {
               <h1>Current Habits</h1>
             </Jumbotron>
             <br/>
+            <div>
+            Total Days Over All Current Habits: {tdcounter}
+            </div>
+            <span id="idforD3"></span> <br/><br/>
             {this.state.goals.length ? (
-              <List><table cellpadding="10">
+              <List>
+              <table cellpadding="10">
                 {this.state.goals.map(goal => (
                   <tr><ListItem key={goal._id}>
-                      <td>
-                        {goal.username}
+                      <td width="400px">
+                       <b>User:</b> {goal.username}
                       </td>
-                      <td>
-                        {goal.habit}
+                      <td width="400px">
+                      <b>Habit: </b> {goal.habit}
                       </td>
-                      <td>
-                       Day Streak: {goal.dayCounter}
+                      <td width="400px">
+                     <b>Day Streak: </b>  {goal.dayCounter}
                       </td>
-
                     <DeleteBtn onClick={() => this.deleteGoal(goal._id)} />
                     <CounterBtn onClick={() => this.changeTheStatus(goal._id, statusChanger)} />
                   </ListItem></tr>
