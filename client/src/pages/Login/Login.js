@@ -73,8 +73,6 @@ class Login extends Component {
   // Sign Up Btn - Toggle Sign up form view
   handleSignUpToggle = event => {
     this.setState({ isHidden: !this.state.isHidden });
-
-    alert("this.state.isHidden: ", this.state.isHidden);
   };
   // Sign Up Process
   handleSignUpSubmit = event => {
@@ -165,7 +163,7 @@ class Login extends Component {
     return (
       <Container fluid>
                   <ImageCard cardImageSource="https://i.imgur.com/z7thY4a.jpg"/>
-
+        <form>
         <Input
           value={this.state.user} //this.state.username
           onChange={this.handleInputChange}
@@ -178,7 +176,7 @@ class Login extends Component {
           name="pwd"
           placeholder="password (required)"
         />
-        <form>
+
           <FormBtn
             disabled={!(this.state.user && this.state.pwd)}
             onClick={this.handleFormSubmit}
@@ -187,10 +185,9 @@ class Login extends Component {
           </FormBtn>
         </form>
 
-        <form>
-          <FormBtn onClick={this.handleSignUpToggle.bind(this)}>SignUp</FormBtn>
-          {/*!this.state.isHidden && */ <ShowForm />}
-        </form>
+
+        <button onClick={this.handleSignUpToggle}>SignUp</button>
+          {!this.state.isHidden && <ShowForm />}
       </Container>
     );
   }
