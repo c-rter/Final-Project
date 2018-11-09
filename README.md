@@ -5,5 +5,10 @@ A behaviour engineering application
 ##Getting Started 
 
 To run project locally first create new connection to MongoDB to run the database. Locally navigate to local repository where project has been cloned and ```npm install```. Then run ```npm start``` and navigate to  [localhost:3000](http://localhost:3000).
-##Icebox
+
+##Built With
+* [React](https://reactjs.org/) - Javascript library to create user interfaces 
+* [Monngoose js](https://mongoosejs.com/) - ORM for MongoDB 
+* [Express js](https://expressjs.com/) -  Node.js web application framework
+* [React Router](https://www.npmjs.com/package/react-router) - Declarative routing for React
 
