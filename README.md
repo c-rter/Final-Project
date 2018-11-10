@@ -30,4 +30,4 @@ This project is licensed under the MIT License
 
 ## Acknowledgments
 
-* Special thanks to Edward, Tom and Elbert for all the help and guidance. 
+Special thanks to Edward, Tom and Elbert for all the help and guidance. 
