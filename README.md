@@ -12,7 +12,7 @@ To run project locally first create new connection to MongoDB to run the databas
 
 ## Built With
 * [React](https://reactjs.org/) - Javascript library to create user interfaces 
-* [Monngoose.js](https://mongoosejs.com/) - ORM for MongoDB 
+* [Mongoose.js](https://mongoosejs.com/) - ORM for MongoDB 
 * [Express.js](https://expressjs.com/) -  Node.js web application framework
 * [React Router](https://www.npmjs.com/package/react-router) - Declarative routing for React
 * [day-of-year npm](https://www.npmjs.com/package/day-of-year) - Gets day of year for a given date
@@ -30,4 +30,4 @@ This project is licensed under the MIT License
 
 ## Acknowledgments
 
-Special thanks to Edward, Tom and Elbert for all the help and guidance. 
+Special thanks to Edward, Tom and Albert for all the help and guidance. 
