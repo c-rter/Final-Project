@@ -36,6 +36,42 @@ const goalSeed = [
     rollingDay: 312
   },
   {
+    username: "carter",
+    password: "password",
+    habit: "test habit",
+    dayCounter: 20,
+    startDay: 290,
+    habitStatus: "active",
+    rollingDay: 312
+  },
+  {
+    username: "carter",
+    password: "password",
+    habit: "test habit 2",
+    dayCounter: 4,
+    startDay: 305,
+    habitStatus: "achieve",
+    rollingDay: 312
+  },
+  {
+    username: "carter",
+    password: "password",
+    habit: "test habit",
+    dayCounter: 20,
+    startDay: 290,
+    habitStatus: "achieve",
+    rollingDay: 312
+  },
+  {
+    username: "carter",
+    password: "password",
+    habit: "test habit 2",
+    dayCounter: 4,
+    startDay: 305,
+    habitStatus: "fail",
+    rollingDay: 312
+  },
+  {
     username: "nitin",
     password: "password",
     habit: "Compliment someone daily",
