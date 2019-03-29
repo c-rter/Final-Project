@@ -1,4 +1,4 @@
-# Final Project : 21 Days
+# 21 Days - A Motivation Application
 
 A behaviour engineering application
 
