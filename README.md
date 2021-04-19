@@ -1,4 +1,4 @@
-Note: This project is still live but no longer maintained as of 2019. Please be advised that some facets may no longer work due to deprecation and username/password stored may be subject to security vulnerabilities. Using fabricated login info is advised for testing the application.
+Note: This project is no longer maintained as of 2019. Please be advised that some facets may no longer work due to deprecation and username/password stored may be subject to security vulnerabilities. Using fabricated login info is advised for testing the application.
 
 # 21 Days - A Motivation Application
 
