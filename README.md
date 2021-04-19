@@ -1,4 +1,4 @@
-Note: This project is no longer maintained as of 2019. Please be advised that some facets may no longer work due to deprecation and username/password stored may be subject to security vulnerabilities. Using fabricated login info is advised for testing the application.
+Note: This project is no longer maintained as of 2019. Please be advised that some facets may no longer work due to deprecation.
 
 # 21 Days - A Motivation Application
 
@@ -7,10 +7,6 @@ A behaviour engineering application
 ## Getting Started 
 
 To run project locally first create new connection to MongoDB to run the database. Locally navigate to local repository where project has been cloned and ```npm install```. Then run ```npm start``` and navigate to  [localhost:3000](http://localhost:3000).
-
-## Heroku
-
-[21 Days](https://twentyonedaysmotivation.herokuapp.com/)
 
 ## Built With
 * [React](https://reactjs.org/) - Javascript library to create user interfaces 
